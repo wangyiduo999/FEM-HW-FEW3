@@ -312,7 +312,7 @@ void FEM<dim>::assemble_system() {
                 //To integrate over this face, loop over all face quadrature points with this single loop
                 for (unsigned int q = 0; q < num_face_quad_pts; ++q) {
                     double x = fe_face_values.quadrature_point(q)[0]; //x-coordinate at the current surface quad. point
-                    h[2] = pow(10, 9) *x;
+                    h[2] = pow(10, 9) * x;
                     //EDIT - define the value of the traction vector, h
                     for (unsigned int A = 0; A < nodes_per_elem; A++) { //loop over all element nodes
                         for (unsigned int i = 0; i < dim; i++) { //loop over nodal dofs
@@ -324,7 +324,7 @@ void FEM<dim>::assemble_system() {
 
                             For det(J) times the total quadrature weight: fe_face_values.JxW(q)*/
 
-                            Flocal[3*A+i] = h[i]*fe_face_values.shape_value(3*A+i,q)*fe_face_values.JxW(q);
+                            Flocal[3 * A + i] += h[i] * fe_face_values.shape_value(3 * A + i, q) * fe_face_values.JxW(q);
                         }
                     }
                 }
